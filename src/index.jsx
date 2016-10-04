@@ -5,14 +5,15 @@ import Modal from './Modal';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      members: [{ ID: 'A01', Name: 'Giacomo Guilizzoni', Age: '37', Address: 'Peldi', Sex: 'male', Is_edit: 'false' }]
+    };
   }
   render() {
-    var democontent = <div id='content'>some demo text as content for modal 1 passed as variable containing HTML</div>;
+    var democontent = <div id='content'>modal</div>;
     return (
       <div>
-        <button onClick="">New</button>
-        <Modal />
+        <Modal openbtn='true' opentext='open demo modal' content={democontent} />
       </div>
     );
   }
