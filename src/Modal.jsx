@@ -3,9 +3,15 @@ import { Modal, Button, form, FormGroup, Radio } from 'react-bootstrap';
 
 
 export default class MyLargeModal extends React.Component {
-  // handleAddNewRow() {
-  //
-  // }
+  constructor(props) {
+    super(props);
+    this.handleAddNewRow = this.handleAddNewRow.bind(this);
+  }
+  handleAddNewRow() {
+    const addMember = { ID: this.IDInput.value, Name: this.NameInput.value, Age: this.AgeInput.value, Address: this.AddressInput.value, Sex: 'female', Is_update: 'false' };
+    this.props.handleAddNewRow(addMember);
+  }
+
   render() {
     return (
       <Modal {...this.props} bsSize='large' aria-labelledby='contained-modal-title-lg'>
@@ -14,22 +20,22 @@ export default class MyLargeModal extends React.Component {
         </Modal.Header>
         <form>
           <Modal.Body>
-            ID: <input type='text' /><br /><br />
-            Name: <input type='text' /><br /><br />
-            Age: <input type='text' /><br /><br />
-            Address: <input type='text' /><br /><br />
+            ID: <input type='text' ref={input => this.IDInput = input} /><br /><br />
+            Name: <input type='text' ref={input => this.NameInput = input} /><br /><br />
+            Age: <input type='text' ref={input => this.AgeInput = input} /><br /><br />
+            Address: <input type='text' ref={input => this.AddressInput = input} /><br /><br />
             <FormGroup>
-              <Radio inline>
+              <Radio inline value='male'>
                 male
               </Radio>
               {' '}
-              <Radio inline>
+              <Radio inline value='female'>
                 female
               </Radio>
             </FormGroup>
           </Modal.Body>
           <Modal.Footer>
-            <Button type='submit' onClick={this.props.onHide}>Save</Button>
+            <Button onClick={this.handleAddNewRow}>Save</Button>
           </Modal.Footer>
         </form>
       </Modal>
@@ -38,5 +44,5 @@ export default class MyLargeModal extends React.Component {
 }
 
 MyLargeModal.propTypes = {
-  onHide: React.PropTypes.func
+  handleAddNewRow: React.PropTypes.func
 };

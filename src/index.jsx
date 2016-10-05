@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-bootstrap';
-import MemberTable from './Member_table';
+import MemberTable from './member_table';
 import MyLargeModal from './Modal';
 
 class App extends React.Component {
@@ -12,26 +12,40 @@ class App extends React.Component {
                 { ID: 'A02', Name: 'Marco Botton', Age: '15', Address: 'Address', Sex: 'male', Is_update: 'false' }],
       lgShow: false
     };
+    this.handleAddNewRow = this.handleAddNewRow.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
+  handleAddNewRow(addMember) {
+    var members = this.state.members;
+    members.push(addMember);
+    this.setState({ members });
+  }
   handleDrop(ID) {
     var members = this.state.members;
-    members = this.state.members.filter(function(member) {
+    members = this.state.members.filter(function(member, index) {
+      if (member.ID === ID) {
+        members.slice(index, 1);
+      }
       return member.ID !== ID;
     });
     this.setState({ members });
   }
-  handleEdit(ID) {
-    var i;
+  handleEdit(editMember, ID) {
     var members = this.state.members;
-    for (i = 0; i < members.length; i + 1) {
-      if (members[i].ID === ID) {
-        members[i].Is_update = 'true';
+
+    members = this.state.members.map(function(member, index) {
+      if (member.ID === ID) {
+        members[index].ID = editMember.ID;
+        members[index].Name = editMember.Name;
+        members[index].Age = editMember.Age;
+        members[index].Address = editMember.Address;
+        members[index].Sex = editMember.Sex;
+        members[index].Is_update = editMember.Is_update;
       }
-    }
+      return member;
+    });
     this.setState({ members });
-    return members;
   }
   render() {
     const lgClose = () => this.setState({ lgShow: false });
@@ -39,7 +53,7 @@ class App extends React.Component {
       <div>
         <Button bsStyle='primary' onClick={() => this.setState({ lgShow: true })}>New</Button>
         <MemberTable members={this.state.members} handleDrop={this.handleDrop} handleEdit={this.handleEdit} />
-        <MyLargeModal show={this.state.lgShow} onHide={lgClose} />
+        <MyLargeModal show={this.state.lgShow} onHide={lgClose} handleAddNewRow={this.handleAddNewRow} />
       </div>
     );
   }

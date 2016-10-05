@@ -12,8 +12,8 @@ export default class MemberTable extends React.Component {
   handleDrop(ID) {
     this.props.handleDrop(ID);
   }
-  handleEdit(ID) {
-    this.props.handleEdit(ID);
+  handleEdit(editMember, ID) {
+    this.props.handleEdit(editMember, ID);
   }
   render() {
     var members = this.props.members.map(function(member) {
@@ -39,7 +39,7 @@ export default class MemberTable extends React.Component {
   }
 }
 MemberTable.propTypes = {
-  members: React.PropTypes.arrayOf(React.PropTypes.string, React.PropTypes.number),
+  members: React.PropTypes.arrayOf(React.PropTypes.object),
   handleDrop: React.PropTypes.func,
   handleEdit: React.PropTypes.func
 };
