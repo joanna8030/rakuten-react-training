@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, tr, td } from 'react-bootstrap';
-import EditModal from './edit-modal';
+// import EditModal from './edit-modal';
+import ModalDialog from './modal';
 
 export default class Member extends React.Component {
   constructor(props) {
@@ -48,13 +49,13 @@ export default class Member extends React.Component {
         <td>
           <Button onClick={() => { this.setState({ lgShow: true }); }}>Edit</Button>
           <Button onClick={(e) => { this.handleDrop(e); }}>Drop</Button>
-          <EditModal show={this.state.lgShow} onHide={this.lgClose} member={member} handleEdit={this.handleEdit} />
+          <ModalDialog show={this.state.lgShow} onHide={this.lgClose} handleEdit={this.handleEdit} title='Update' member={member} />
         </td>
       </tr>
     );
   }
 }
-
+// <EditModal show={this.state.lgShow} onHide={this.lgClose} member={member} handleEdit={this.handleEdit} />
 Member.propTypes = {
   id: React.PropTypes.string,
   name: React.PropTypes.string,

@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-bootstrap';
 import MemberTable from './member_table';
-import InsertModal from './insert-modal';
+// import InsertModal from './insert-modal';
+import ModalDialog from './modal';
 
 class App extends React.Component {
   constructor(props) {
@@ -49,15 +50,16 @@ class App extends React.Component {
   }
 
   render() {
+    var member = {};
     return (
       <div>
         <Button bsStyle='primary' onClick={() => this.setState({ lgShow: true })}>New</Button>
         <MemberTable members={this.state.members} handleDrop={this.handleDrop} handleEdit={this.handleEdit} />
-        <InsertModal show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} />
+        <ModalDialog show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} title='New Row' member={member} />
       </div>
     );
   }
 }
-
+// <InsertModal show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} />
 
 ReactDOM.render(<App />, document.getElementById('app'));
