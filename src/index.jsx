@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-bootstrap';
-import MemberTable from './member_table';
+import MemberTable from './member-table';
 // import InsertModal from './insert-modal';
 import ModalDialog from './modal';
 
@@ -11,12 +11,15 @@ class App extends React.Component {
     this.state = {
       members: [{ id: 'A01', name: 'Giacomo Guilizzoni', age: '37', address: 'Peldi', sex: 'male', isUpdate: 'false' },
                 { id: 'A02', name: 'Marco Botton', age: '15', address: 'Address', sex: 'male', isUpdate: 'false' }],
-      lgShow: false
+      lgShow: false,
+      triggeredBy: 'New Row',
+      member: {}
     };
     this.handleAddNewRow = this.handleAddNewRow.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.lgClose = this.lgClose.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
 
   handleAddNewRow(addMember) {
@@ -49,17 +52,20 @@ class App extends React.Component {
     this.setState({ lgShow: false });
   }
 
+  handleModal(member) {
+    this.setState({ lgShow: true, triggeredBy: 'update', member });
+    this.setProps({});
+  }
+
   render() {
-    var member = {};
     return (
       <div>
-        <Button bsStyle='primary' onClick={() => this.setState({ lgShow: true })}>New</Button>
-        <MemberTable members={this.state.members} handleDrop={this.handleDrop} handleEdit={this.handleEdit} />
-        <ModalDialog show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} title='New Row' member={member} />
+        <Button bsStyle='primary' onClick={() => this.setState({ lgShow: true, triggeredBy: 'New Row', member: {} })}>New</Button>
+        <MemberTable members={this.state.members} handleDrop={this.handleDrop} handleEdit={this.handleEdit} handleModal={this.handleModal} />
+        <ModalDialog show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} title={this.state.triggeredBy} member={this.state.member} handleEdit={this.handleEdit} />
       </div>
     );
   }
 }
-// <InsertModal show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} />
 
 ReactDOM.render(<App />, document.getElementById('app'));

@@ -1,16 +1,17 @@
 import React from 'react';
 import { Button, tr, td } from 'react-bootstrap';
 // import EditModal from './edit-modal';
-import ModalDialog from './modal';
+// import ModalDialog from './modal';
 
 export default class Member extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      lgShow: false
-      // member: { ID: this.props.ID, Name: this.props.Name, Age: this.props.Age, Address: this.props.Address, Sex: this.props.Sex, Is_update: this.props.Is_update }
-    };
+    // this.state = {
+    //   lgShow: false
+    //   // member: { ID: this.props.ID, Name: this.props.Name, Age: this.props.Age, Address: this.props.Address, Sex: this.props.Sex, Is_update: this.props.Is_update }
+    // };
+
     this.handleDrop = this.handleDrop.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.lgClose = this.lgClose.bind(this);
@@ -47,15 +48,17 @@ export default class Member extends React.Component {
         <td>{this.props.address}</td>
         <td>{this.props.sex}</td>
         <td>
-          <Button onClick={() => { this.setState({ lgShow: true }); }}>Edit</Button>
+          <Button onClick={() => this.props.handleModal(member)}>Edit</Button>
           <Button onClick={(e) => { this.handleDrop(e); }}>Drop</Button>
-          <ModalDialog show={this.state.lgShow} onHide={this.lgClose} handleEdit={this.handleEdit} title='Update' member={member} />
         </td>
       </tr>
     );
   }
 }
-// <EditModal show={this.state.lgShow} onHide={this.lgClose} member={member} handleEdit={this.handleEdit} />
+
+// <Button onClick={() => this.props.handleModal(member)}>Edit</Button>
+
+
 Member.propTypes = {
   id: React.PropTypes.string,
   name: React.PropTypes.string,
@@ -64,5 +67,6 @@ Member.propTypes = {
   sex: React.PropTypes.string,
   isUpdate: React.PropTypes.string,
   handleDrop: React.PropTypes.func,
-  handleEdit: React.PropTypes.func
+  handleEdit: React.PropTypes.func,
+  handleModal: React.PropTypes.func
 };

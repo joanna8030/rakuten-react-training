@@ -8,6 +8,7 @@ export default class MemberTable extends React.Component {
     super(props);
     this.handleDrop = this.handleDrop.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
 
   handleDrop(id) {
@@ -18,9 +19,13 @@ export default class MemberTable extends React.Component {
     this.props.handleEdit(editMember, id);
   }
 
+  handleModal(member) {
+    this.props.handleModal(member);
+  }
+
   render() {
     var members = this.props.members.map(member =>
-      (<Member key={member.id} id={member.id} name={member.name} age={member.age} address={member.address} sex={member.sex} isUpdate={member.isUpdate} handleDrop={this.handleDrop} handleEdit={this.handleEdit} />)
+      (<Member key={member.id} id={member.id} name={member.name} age={member.age} address={member.address} sex={member.sex} isUpdate={member.isUpdate} handleDrop={this.handleDrop} handleEdit={this.handleEdit} handleModal={this.handleModal} />)
     );
     return (
       <Table responsive>
@@ -45,5 +50,6 @@ export default class MemberTable extends React.Component {
 MemberTable.propTypes = {
   members: React.PropTypes.arrayOf(React.PropTypes.object),
   handleDrop: React.PropTypes.func,
-  handleEdit: React.PropTypes.func
+  handleEdit: React.PropTypes.func,
+  handleModal: React.PropTypes.func
 };

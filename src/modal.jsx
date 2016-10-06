@@ -5,13 +5,23 @@ import { Modal, Button, form, FormGroup, Radio } from 'react-bootstrap';
 export default class ModalDialog extends React.Component {
   constructor(props) {
     super(props);
-    console.log('constructor');
+    // console.log('constructor');
     this.state = { name: this.props.member.name,
                    age: this.props.member.age,
                    address: this.props.member.address };
     this.handleAddNewRow = this.handleAddNewRow.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    // this.componentWillReceivedProps = this.componentWillReceivedProps.bind(this);
+  }
+
+  componentWillReceivedProps(lgShow, triggeredBy, member) {
+    console.log('Get!!!' + member.name);
+    this.setState({
+      name: member.name,
+      age: member.age,
+      address: member.address
+    });
   }
 
   handleAddNewRow() {
