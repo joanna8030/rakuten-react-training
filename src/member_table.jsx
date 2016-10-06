@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, thead, tr, th, tbody } from 'react-bootstrap';
-import Member from './Member';
+import Member from './member-row';
 
 
 export default class MemberTable extends React.Component {
@@ -9,16 +9,19 @@ export default class MemberTable extends React.Component {
     this.handleDrop = this.handleDrop.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
-  handleDrop(ID) {
-    this.props.handleDrop(ID);
+
+  handleDrop(id) {
+    this.props.handleDrop(id);
   }
-  handleEdit(editMember, ID) {
-    this.props.handleEdit(editMember, ID);
+
+  handleEdit(editMember, id) {
+    this.props.handleEdit(editMember, id);
   }
+
   render() {
-    var members = this.props.members.map(function(member) {
-      return (<Member key={member.ID} ID={member.ID} Name={member.Name} Age={member.Age} Address={member.Address} Sex={member.Sex} Is_update={member.Is_update} handleDrop={this.handleDrop} handleEdit={this.handleEdit} />);
-    }, this);
+    var members = this.props.members.map(member =>
+      (<Member key={member.id} id={member.id} name={member.name} age={member.age} address={member.address} sex={member.sex} isUpdate={member.isUpdate} handleDrop={this.handleDrop} handleEdit={this.handleEdit} />)
+    );
     return (
       <Table responsive>
         <thead>
@@ -38,6 +41,7 @@ export default class MemberTable extends React.Component {
     );
   }
 }
+
 MemberTable.propTypes = {
   members: React.PropTypes.arrayOf(React.PropTypes.object),
   handleDrop: React.PropTypes.func,
