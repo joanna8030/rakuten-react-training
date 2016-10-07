@@ -1,63 +1,69 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'react-bootstrap';
-import MemberTable from './member_table';
-import MyLargeModal from './Modal';
+import MemberTable from './member-table';
+import ModalDialog from './modal';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      members: [{ ID: 'A01', Name: 'Giacomo Guilizzoni', Age: '37', Address: 'Peldi', Sex: 'male', Is_update: 'false' },
-                { ID: 'A02', Name: 'Marco Botton', Age: '15', Address: 'Address', Sex: 'male', Is_update: 'false' }],
-      lgShow: false
+      members: [{ id: 'A01', name: 'Giacomo Guilizzoni', age: '37', address: 'Peldi', sex: 'male', isUpdate: false },
+                { id: 'A02', name: 'Marco Botton', age: '15', address: 'Address', sex: 'male', isUpdate: false }],
+      lgShow: false,
+      triggeredBy: 'New Row',
+      member: {}
     };
     this.handleAddNewRow = this.handleAddNewRow.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.lgClose = this.lgClose.bind(this);
+    this.handleModal = this.handleModal.bind(this);
   }
+
   handleAddNewRow(addMember) {
     var members = this.state.members;
     members.push(addMember);
     this.setState({ members });
   }
-  handleDrop(ID) {
-    var members = this.state.members;
-    members = this.state.members.filter(function(member, index) {
-      if (member.ID === ID) {
-        members.slice(index, 1);
-      }
-      return member.ID !== ID;
-    });
-    this.setState({ members });
-  }
-  handleEdit(editMember, ID) {
-    var members = this.state.members;
 
-    members = this.state.members.map(function(member, index) {
-      if (member.ID === ID) {
-        members[index].ID = editMember.ID;
-        members[index].Name = editMember.Name;
-        members[index].Age = editMember.Age;
-        members[index].Address = editMember.Address;
-        members[index].Sex = editMember.Sex;
-        members[index].Is_update = editMember.Is_update;
+  handleDrop(id) {
+    var members = this.state.members.filter(member => member.id !== id);
+    this.setState({ members });
+  }
+
+  handleEdit(editMember, id) {
+    var members = this.state.members.map((member) => {
+      var _member = member;
+      if (_member.id === id) {
+        _member.name = editMember.name;
+        _member.age = editMember.age;
+        _member.address = editMember.address;
+        _member.sex = editMember.sex;
+        _member.isUpdate = editMember.isUpdate;
       }
-      return member;
+      return _member;
     });
     this.setState({ members });
   }
+
+  lgClose() {
+    this.setState({ lgShow: false });
+  }
+
+  handleModal(triggeredBy, member) {
+    this.setState({ lgShow: true, triggeredBy, member });
+  }
+
   render() {
-    const lgClose = () => this.setState({ lgShow: false });
     return (
       <div>
-        <Button bsStyle='primary' onClick={() => this.setState({ lgShow: true })}>New</Button>
-        <MemberTable members={this.state.members} handleDrop={this.handleDrop} handleEdit={this.handleEdit} />
-        <MyLargeModal show={this.state.lgShow} onHide={lgClose} handleAddNewRow={this.handleAddNewRow} />
+        <Button bsStyle='primary' onClick={() => this.handleModal('New Row', {})}>New</Button>
+        <MemberTable members={this.state.members} handleDrop={this.handleDrop} handleEdit={this.handleEdit} handleModal={this.handleModal} />
+        <ModalDialog show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} title={this.state.triggeredBy} member={this.state.member} handleEdit={this.handleEdit} />
       </div>
     );
   }
 }
-
 
 ReactDOM.render(<App />, document.getElementById('app'));
