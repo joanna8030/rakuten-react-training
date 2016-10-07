@@ -59,8 +59,20 @@ class App extends React.Component {
     return (
       <div>
         <Button bsStyle='primary' onClick={() => this.handleModal('New Row', {})}>New</Button>
-        <MemberTable members={this.state.members} handleDrop={this.handleDrop} handleEdit={this.handleEdit} handleModal={this.handleModal} />
-        <ModalDialog show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} title={this.state.triggeredBy} member={this.state.member} handleEdit={this.handleEdit} />
+        <MemberTable
+          members={this.state.members}
+          handleDrop={this.handleDrop}
+          handleEdit={this.handleEdit}
+          handleModal={this.handleModal}
+        />
+        <ModalDialog
+          show={this.state.lgShow}
+          onHide={this.lgClose}
+          handleAddNewRow={this.handleAddNewRow}
+          title={this.state.triggeredBy}
+          member={this.state.member}
+          handleEdit={this.handleEdit}
+        />
       </div>
     );
   }
