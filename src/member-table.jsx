@@ -19,8 +19,8 @@ export default class MemberTable extends React.Component {
     this.props.handleEdit(editMember, id);
   }
 
-  handleModal(member) {
-    this.props.handleModal(member);
+  handleModal(triggeredBy, member) {
+    this.props.handleModal(triggeredBy, member);
   }
 
   render() {

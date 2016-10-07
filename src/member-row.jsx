@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, tr, td } from 'react-bootstrap';
-// import EditModal from './edit-modal';
-// import ModalDialog from './modal';
+
 
 export default class Member extends React.Component {
   constructor(props) {
@@ -31,7 +30,7 @@ export default class Member extends React.Component {
 
   render() {
     let color = '';
-    color += (this.props.isUpdate === 'true') ? '#f1f442' : '';
+    color += (this.props.isUpdate === true) ? '#f1f442' : '';
     const member = {
       id: this.props.id,
       name: this.props.name,
@@ -48,7 +47,7 @@ export default class Member extends React.Component {
         <td>{this.props.address}</td>
         <td>{this.props.sex}</td>
         <td>
-          <Button onClick={() => this.props.handleModal(member)}>Edit</Button>
+          <Button onClick={() => this.props.handleModal('update', member)}>Edit</Button>
           <Button onClick={(e) => { this.handleDrop(e); }}>Drop</Button>
         </td>
       </tr>
@@ -56,16 +55,13 @@ export default class Member extends React.Component {
   }
 }
 
-// <Button onClick={() => this.props.handleModal(member)}>Edit</Button>
-
-
 Member.propTypes = {
   id: React.PropTypes.string,
   name: React.PropTypes.string,
   age: React.PropTypes.string,
   address: React.PropTypes.string,
   sex: React.PropTypes.string,
-  isUpdate: React.PropTypes.string,
+  isUpdate: React.PropTypes.bool,
   handleDrop: React.PropTypes.func,
   handleEdit: React.PropTypes.func,
   handleModal: React.PropTypes.func
