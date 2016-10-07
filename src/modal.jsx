@@ -67,7 +67,7 @@ export default class ModalDialog extends React.Component {
     else attr['data-male'] = 'true';
 
     return (
-      <Modal {...this.props} bsSize='large' aria-labelledby='contained-modal-title-lg'>
+      <Modal show={this.props.show} onHide={this.props.onHide} bsSize='large' aria-labelledby='contained-modal-title-lg'>
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-lg'>{this.props.title}</Modal.Title>
         </Modal.Header>
@@ -108,5 +108,6 @@ ModalDialog.propTypes = {
   }),
   handleAddNewRow: React.PropTypes.func,
   onHide: React.PropTypes.func,
-  handleEdit: React.PropTypes.func
+  handleEdit: React.PropTypes.func,
+  show: React.PropTypes.bool
 };
