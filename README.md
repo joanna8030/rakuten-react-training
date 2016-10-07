@@ -10,6 +10,8 @@ React Table (using popup modal as insert and update form)
 - eslint (Use eslint-config-airbnb)   
 
 ### Run
-  npm install -- install all dependencies   
-  npm start -- start webpack dev server   
-  run http://localhost:8080/
+```sh
+npm install -- install all dependencies   
+npm start -- start webpack dev server   
+run http://localhost:8080/
+```
