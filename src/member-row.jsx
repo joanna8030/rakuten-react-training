@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, tr, td } from 'react-bootstrap';
+import Const from './const';
 
 
 export default class Member extends React.Component {
@@ -47,7 +48,7 @@ export default class Member extends React.Component {
         <td>{this.props.address}</td>
         <td>{this.props.sex}</td>
         <td>
-          <Button onClick={() => this.props.handleModal('update', member)}>Edit</Button>
+          <Button onClick={() => this.props.handleModal(Const.Update, member)}>Edit</Button>
           <Button onClick={(e) => { this.handleDrop(e); }}>Drop</Button>
         </td>
       </tr>
