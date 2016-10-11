@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Button } from 'react-bootstrap';
 import MemberTable from './member-table';
 import ModalDialog from './modal';
+import Const from './const';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends React.Component {
       members: [{ id: 'A01', name: 'Giacomo Guilizzoni', age: '37', address: 'Peldi', sex: 'male', isUpdate: false },
                 { id: 'A02', name: 'Marco Botton', age: '15', address: 'Address', sex: 'male', isUpdate: false }],
       lgShow: false,
-      triggeredBy: 'New Row',
+      triggeredBy: Const.New,
       member: {}
     };
     this.handleAddNewRow = this.handleAddNewRow.bind(this);
@@ -59,8 +60,20 @@ class App extends React.Component {
     return (
       <div>
         <Button bsStyle='primary' onClick={() => this.handleModal('New Row', {})}>New</Button>
-        <MemberTable members={this.state.members} handleDrop={this.handleDrop} handleEdit={this.handleEdit} handleModal={this.handleModal} />
-        <ModalDialog show={this.state.lgShow} onHide={this.lgClose} handleAddNewRow={this.handleAddNewRow} title={this.state.triggeredBy} member={this.state.member} handleEdit={this.handleEdit} />
+        <MemberTable
+          members={this.state.members}
+          handleDrop={this.handleDrop}
+          handleEdit={this.handleEdit}
+          handleModal={this.handleModal}
+        />
+        <ModalDialog
+          show={this.state.lgShow}
+          onHide={this.lgClose}
+          handleAddNewRow={this.handleAddNewRow}
+          title={this.state.triggeredBy}
+          member={this.state.member}
+          handleEdit={this.handleEdit}
+        />
       </div>
     );
   }

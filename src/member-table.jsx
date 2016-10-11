@@ -25,7 +25,19 @@ export default class MemberTable extends React.Component {
 
   render() {
     var members = this.props.members.map(member =>
-      (<Member key={member.id} id={member.id} name={member.name} age={member.age} address={member.address} sex={member.sex} isUpdate={member.isUpdate} handleDrop={this.handleDrop} handleEdit={this.handleEdit} handleModal={this.handleModal} />)
+      (
+      <Member
+        key={member.id}
+        id={member.id}
+        name={member.name}
+        age={member.age}
+        address={member.address}
+        sex={member.sex}
+        isUpdate={member.isUpdate}
+        handleDrop={this.handleDrop}
+        handleEdit={this.handleEdit}
+        handleModal={this.handleModal}
+      />)
     );
     return (
       <Table responsive>

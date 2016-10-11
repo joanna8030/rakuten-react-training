@@ -60,14 +60,14 @@ export default class ModalDialog extends React.Component {
   }
 
   render() {
-    var insertOrUpdate = (this.props.title === 'New Row') ? this.handleAddNewRow : this.handleEdit;
-    var idFormInput = (this.props.title === 'New Row') ? (<input type='text' ref={input => this.idInput = input} />) : this.props.member.id;
-    var attr = {};
-    if (this.state.sex === 'female') attr['data-female'] = 'true';
-    else attr['data-male'] = 'true';
+    const insertOrUpdate = (this.props.title === 'New Row') ? this.handleAddNewRow : this.handleEdit;
+    const idFormInput = (this.props.title === 'New Row') ? (<input type='text' ref={input => this.idInput = input} />) : this.props.member.id;
+    // var attr = {};
+    // if (this.state.sex === 'female') attr['data-female'] = 'true';
+    // else attr['data-male'] = 'true';
 
     return (
-      <Modal {...this.props} bsSize='large' aria-labelledby='contained-modal-title-lg'>
+      <Modal show={this.props.show} onHide={this.props.onHide} bsSize='large' aria-labelledby='contained-modal-title-lg'>
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-lg'>{this.props.title}</Modal.Title>
         </Modal.Header>
@@ -77,7 +77,6 @@ export default class ModalDialog extends React.Component {
             Name: <input type='text' name='name' value={this.state.name} ref={input => this.nameInput = input} onChange={this.handleChange} /><br /><br />
             Age: <input type='text' name='age' value={this.state.age} ref={input => this.ageInput = input} onChange={this.handleChange} /><br /><br />
             Address: <input type='text' name='address' value={this.state.address} ref={input => this.addressInput = input} onChange={this.handleChange} /><br /><br />
-            <p {...attr}>HelloWorld</p>
             <ButtonGroup name='sex' type='radio' value={this.state.sex} onChange={this.handleRadioSelect}>
               {
                 ['male', 'female'].map(sex =>
@@ -108,5 +107,6 @@ ModalDialog.propTypes = {
   }),
   handleAddNewRow: React.PropTypes.func,
   onHide: React.PropTypes.func,
-  handleEdit: React.PropTypes.func
+  handleEdit: React.PropTypes.func,
+  show: React.PropTypes.bool
 };
