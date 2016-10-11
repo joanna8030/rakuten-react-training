@@ -6,21 +6,21 @@ import Member from './member-row';
 export default class MemberTable extends React.Component {
   constructor(props) {
     super(props);
-    this.handleDrop = this.handleDrop.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
-    this.handleModal = this.handleModal.bind(this);
+    this.onDropRow = this.onDropRow.bind(this);
+    this.onEditRow = this.onEditRow.bind(this);
+    this.onEditBtnClick = this.onEditBtnClick.bind(this);
   }
 
-  handleDrop(id) {
-    this.props.handleDrop(id);
+  onDropRow(id) {
+    this.props.onDropRow(id);
   }
 
-  handleEdit(editMember, id) {
-    this.props.handleEdit(editMember, id);
+  onEditRow(editMember, id) {
+    this.props.onEditRow(editMember, id);
   }
 
-  handleModal(triggeredBy, member) {
-    this.props.handleModal(triggeredBy, member);
+  onEditBtnClick(triggeredBy, member) {
+    this.props.onEditBtnClick(triggeredBy, member);
   }
 
   render() {
@@ -34,9 +34,9 @@ export default class MemberTable extends React.Component {
         address={member.address}
         sex={member.sex}
         isUpdate={member.isUpdate}
-        handleDrop={this.handleDrop}
-        handleEdit={this.handleEdit}
-        handleModal={this.handleModal}
+        handleDrop={this.onDropRow}
+        handleEdit={this.onEditRow}
+        handleModal={this.onEditBtnClick}
       />)
     );
     return (
@@ -61,7 +61,7 @@ export default class MemberTable extends React.Component {
 
 MemberTable.propTypes = {
   members: React.PropTypes.arrayOf(React.PropTypes.object),
-  handleDrop: React.PropTypes.func,
-  handleEdit: React.PropTypes.func,
-  handleModal: React.PropTypes.func
+  onDropRow: React.PropTypes.func,
+  onEditRow: React.PropTypes.func,
+  onEditBtnClick: React.PropTypes.func
 };

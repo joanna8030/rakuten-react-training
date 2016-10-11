@@ -62,9 +62,9 @@ class App extends React.Component {
         <Button bsStyle='primary' onClick={() => this.handleModal('New Row', {})}>New</Button>
         <MemberTable
           members={this.state.members}
-          handleDrop={this.handleDrop}
-          handleEdit={this.handleEdit}
-          handleModal={this.handleModal}
+          onDropRow={this.handleDrop}
+          onEditRow={this.handleEdit}
+          onEditBtnClick={this.handleModal}
         />
         <ModalDialog
           show={this.state.lgShow}
