@@ -12,7 +12,7 @@ export default class ModalDialog extends React.Component {
                    address: this.props.member.address,
                    sex: this.props.member.sex
                  };
-    this.handleAddNewRow = this.handleAddNewRow.bind(this);
+    this.handleAddRow = this.handleAddRow.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -26,7 +26,7 @@ export default class ModalDialog extends React.Component {
     });
   }
 
-  handleAddNewRow() {
+  handleAddRow() {
     const addMember = {
       id: this.idInput.value,
       name: this.nameInput.value,
@@ -35,7 +35,7 @@ export default class ModalDialog extends React.Component {
       sex: this.state.sex,
       isUpdate: false
     };
-    this.props.handleAddNewRow(addMember);
+    this.props.onAddRow(addMember);
     this.props.onHide();
   }
 
@@ -47,7 +47,7 @@ export default class ModalDialog extends React.Component {
       sex: this.state.sex,
       isUpdate: true
     };
-    this.props.handleEdit(editMember, this.props.member.id);
+    this.props.onEditRow(editMember, this.props.member.id);
     this.props.onHide();
   }
 
@@ -60,7 +60,7 @@ export default class ModalDialog extends React.Component {
   }
 
   render() {
-    const insertOrUpdate = (this.props.title === 'New Row') ? this.handleAddNewRow : this.handleEdit;
+    const insertOrUpdate = (this.props.title === 'New Row') ? this.handleAddRow : this.handleEdit;
     const idFormInput = (this.props.title === 'New Row') ? (<input type='text' ref={input => this.idInput = input} />) : this.props.member.id;
     // var attr = {};
     // if (this.state.sex === 'female') attr['data-female'] = 'true';
@@ -105,8 +105,8 @@ ModalDialog.propTypes = {
     address: React.PropTypes.string,
     sex: React.PropTypes.string
   }),
-  handleAddNewRow: React.PropTypes.func,
+  onAddRow: React.PropTypes.func,
   onHide: React.PropTypes.func,
-  handleEdit: React.PropTypes.func,
+  onEditRow: React.PropTypes.func,
   show: React.PropTypes.bool
 };

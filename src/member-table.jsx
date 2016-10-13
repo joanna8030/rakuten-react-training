@@ -6,20 +6,20 @@ import Member from './member-row';
 export default class MemberTable extends React.Component {
   constructor(props) {
     super(props);
-    this.onDropRow = this.onDropRow.bind(this);
-    this.onEditRow = this.onEditRow.bind(this);
-    this.onEditBtnClick = this.onEditBtnClick.bind(this);
+    this.handleDropRow = this.handleDropRow.bind(this);
+    this.handleEditRow = this.handleEditRow.bind(this);
+    this.handleModalOpen = this.handleModalOpen.bind(this);
   }
 
-  onDropRow(id) {
+  handleDropRow(id) {
     this.props.onDropRow(id);
   }
 
-  onEditRow(editMember, id) {
+  handleEditRow(editMember, id) {
     this.props.onEditRow(editMember, id);
   }
 
-  onEditBtnClick(triggeredBy, member) {
+  handleModalOpen(triggeredBy, member) {
     this.props.onEditBtnClick(triggeredBy, member);
   }
 
@@ -34,9 +34,9 @@ export default class MemberTable extends React.Component {
         address={member.address}
         sex={member.sex}
         isUpdate={member.isUpdate}
-        handleDrop={this.onDropRow}
-        handleEdit={this.onEditRow}
-        handleModal={this.onEditBtnClick}
+        onDropRow={this.handleDropRow}
+        onEditRow={this.handleEditRow}
+        onEditBtnClick={this.handleModalOpen}
       />)
     );
     return (

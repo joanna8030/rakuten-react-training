@@ -15,25 +15,25 @@ class App extends React.Component {
       triggeredBy: Const.New,
       member: {}
     };
-    this.handleAddNewRow = this.handleAddNewRow.bind(this);
-    this.handleDrop = this.handleDrop.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
+    this.handleAddRow = this.handleAddRow.bind(this);
+    this.handleDropRow = this.handleDropRow.bind(this);
+    this.handleEditRow = this.handleEditRow.bind(this);
     this.lgClose = this.lgClose.bind(this);
-    this.handleModal = this.handleModal.bind(this);
+    this.handleModalOpen = this.handleModalOpen.bind(this);
   }
 
-  handleAddNewRow(addMember) {
+  handleAddRow(addMember) {
     var members = this.state.members;
     members.push(addMember);
     this.setState({ members });
   }
 
-  handleDrop(id) {
+  handleDropRow(id) {
     var members = this.state.members.filter(member => member.id !== id);
     this.setState({ members });
   }
 
-  handleEdit(editMember, id) {
+  handleEditRow(editMember, id) {
     var members = this.state.members.map((member) => {
       var _member = member;
       if (_member.id === id) {
@@ -52,27 +52,27 @@ class App extends React.Component {
     this.setState({ lgShow: false });
   }
 
-  handleModal(triggeredBy, member) {
+  handleModalOpen(triggeredBy, member) {
     this.setState({ lgShow: true, triggeredBy, member });
   }
 
   render() {
     return (
       <div>
-        <Button bsStyle='primary' onClick={() => this.handleModal('New Row', {})}>New</Button>
+        <Button bsStyle='primary' onClick={() => this.handleModalOpen('New Row', {})}>New</Button>
         <MemberTable
           members={this.state.members}
-          onDropRow={this.handleDrop}
-          onEditRow={this.handleEdit}
-          onEditBtnClick={this.handleModal}
+          onDropRow={this.handleDropRow}
+          onEditRow={this.handleEditRow}
+          onEditBtnClick={this.handleModalOpen}
         />
         <ModalDialog
           show={this.state.lgShow}
           onHide={this.lgClose}
-          handleAddNewRow={this.handleAddNewRow}
+          onAddRow={this.handleAddRow}
           title={this.state.triggeredBy}
           member={this.state.member}
-          handleEdit={this.handleEdit}
+          onEditRow={this.handleEditRow}
         />
       </div>
     );

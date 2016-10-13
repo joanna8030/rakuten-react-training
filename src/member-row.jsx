@@ -12,17 +12,17 @@ export default class Member extends React.Component {
     //   // member: { ID: this.props.ID, Name: this.props.Name, Age: this.props.Age, Address: this.props.Address, Sex: this.props.Sex, Is_update: this.props.Is_update }
     // };
 
-    this.handleDrop = this.handleDrop.bind(this);
+    this.handleDropRow = this.handleDropRow.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.lgClose = this.lgClose.bind(this);
   }
 
-  handleDrop() {
-    this.props.handleDrop(this.props.id);
+  handleDropRow() {
+    this.props.onDropRow(this.props.id);
   }
 
   handleEdit(editMember, id) {
-    this.props.handleEdit(editMember, id);
+    this.props.onEditRow(editMember, id);
   }
 
   lgClose() {
@@ -48,8 +48,8 @@ export default class Member extends React.Component {
         <td>{this.props.address}</td>
         <td>{this.props.sex}</td>
         <td>
-          <Button onClick={() => this.props.handleModal(Const.Update, member)}>Edit</Button>
-          <Button onClick={(e) => { this.handleDrop(e); }}>Drop</Button>
+          <Button onClick={() => this.props.onEditBtnClick(Const.Update, member)}>Edit</Button>
+          <Button onClick={(e) => { this.handleDropRow(e); }}>Drop</Button>
         </td>
       </tr>
     );
@@ -63,7 +63,7 @@ Member.propTypes = {
   address: React.PropTypes.string,
   sex: React.PropTypes.string,
   isUpdate: React.PropTypes.bool,
-  handleDrop: React.PropTypes.func,
-  handleEdit: React.PropTypes.func,
-  handleModal: React.PropTypes.func
+  onDropRow: React.PropTypes.func,
+  onEditRow: React.PropTypes.func,
+  onEditBtnClick: React.PropTypes.func
 };
